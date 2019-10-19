@@ -14,7 +14,9 @@
     "checkJs": false,
     "moduleResolution": "node",
     "baseUrl": "src",
-    "paths": {},
+    "paths": {
+      "mockDatas/*": ["../test/mockDatas/*"]
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,

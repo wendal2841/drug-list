@@ -74,7 +74,10 @@ module.exports = {
     publicUrl: getPublicUrl(resolveApp('package.json')),
     servedPath: getServedPath(resolveApp('package.json')),
     appAlias: {
+        components: resolveApp('src/components/'),
+        entities: resolveApp('src/entities/'),
         pages: resolveApp('src/pages/'),
+        utils: resolveApp('src/utils/'),
         types: resolveApp('src/types.ts'),
     },
 };
