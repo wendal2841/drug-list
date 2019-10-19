@@ -1,16 +1,16 @@
 import * as redux from 'redux';
 import sinon from 'sinon';
-import { entitiesReducer } from 'entities/reducers';
+import drugReducer from 'entities/drug/reducer';
 
-it('combineReducers test', () => {
+it('entitiesReducer test', () => {
     //Given
     const combineReducersSpy = sinon.spy(redux, 'combineReducers');
     const expected = {
-        entities: entitiesReducer,
+        drug: drugReducer,
     };
 
     //When
-    require('reducers');
+    require('entities/reducers');
 
     //Then
     expect(combineReducersSpy.calledOnceWithExactly(expected)).toBeTruthy();
