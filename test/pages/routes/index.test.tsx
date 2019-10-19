@@ -4,12 +4,13 @@ import { IPropsRoutes } from 'pages/routes/types';
 import configureStore from 'redux-mock-store';
 import { Routes } from 'pages/routes';
 import { createBrowserHistory } from 'history';
-import { App } from 'pages/app';
+import DrugList from 'pages/drug-list';
 
 jest.mock(
     'react-redux',
     () => ({
         Provider: (props: object): JSX.Element => (<div className="provider" {...props} />),
+        connect: (): () => JSX.Element => (): JSX.Element => (<div />)
     }),
 );
 jest.mock(
@@ -67,6 +68,6 @@ describe('pages => Routes', () => {
         //Then
         expect(element.at(0).prop('exact')).toEqual(true);
         expect(element.at(0).prop('path')).toEqual('/');
-        expect(element.at(0).prop('component')).toEqual(App);
+        expect(element.at(0).prop('component')).toEqual(DrugList);
     });
 });

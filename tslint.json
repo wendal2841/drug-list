@@ -26,8 +26,12 @@
             true,
             "dev",
             [
+                "components",
+                "entities",
                 "pages",
-                "types"
+                "utils",
+                "types",
+                "mockDatas"
             ]
         ],
         "ordered-imports": false,
