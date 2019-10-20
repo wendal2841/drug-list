@@ -1,6 +1,6 @@
-import reducer from 'entities/drug/reducer';
+import reducer from 'entities/medicine/reducer';
 
-describe('entities => drug => reducer', () => {
+describe('entities => medicine => reducer', () => {
     const data = {
         state: {
             one: undefined,
@@ -10,7 +10,7 @@ describe('entities => drug => reducer', () => {
         },
         expected: {
             one: {
-                drugs: [],
+                medicineList: [],
             }
         }
     };

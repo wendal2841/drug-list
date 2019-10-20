@@ -1,3 +1,3 @@
 import { RestActionType } from 'utils/restActionType';
 
-export const DRUGS = new RestActionType('DRUGS');
+export const MEDICINE = new RestActionType('MEDICINE');

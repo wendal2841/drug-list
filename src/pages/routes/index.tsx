@@ -3,13 +3,13 @@ import { IPropsRoutes } from './types';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router';
 import { Provider } from 'react-redux';
-import DrugList from 'pages/drug-list';
+import MedicineList from 'pages/medicine-list';
 
 export const Routes: React.FC<IPropsRoutes> = ({ store, history }) => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>
-                <Route exact path="/" component={DrugList} />
+                <Route exact path="/" component={MedicineList} />
             </Switch>
         </ConnectedRouter>
     </Provider>

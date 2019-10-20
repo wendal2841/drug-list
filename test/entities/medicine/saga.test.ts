@@ -1,15 +1,15 @@
 import { takeEvery } from 'redux-saga/effects';
-import * as saga from 'entities/drug/saga';
-import { IGetDrugs } from 'entities/drug/types';
+import * as saga from 'entities/medicine/saga';
+import { IGetMedicine } from 'entities/medicine/types';
 
-describe('entities => drug => saga', () => {
+describe('entities => medicine => saga', () => {
     it('apiDrugs test', () => {
         //When
         const generator = saga.default();
 
         //Then
         expect(generator.next().value).toEqual(
-            takeEvery('DRUGS__GET__REQUEST', saga.getDrugs as IGetDrugs),
+            takeEvery('MEDICINE__GET__REQUEST', saga.getMedicineList as IGetMedicine),
         );
         expect(generator.next().done).toBeTruthy();
     });

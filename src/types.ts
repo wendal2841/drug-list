@@ -1,6 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { HelperFunc0 } from 'redux-saga/effects';
-import { IStoreEntities } from './entities/tupes';
+import { IStoreEntities } from './entities/types';
 
 export type TSaga = () => SagaIterator;
 
