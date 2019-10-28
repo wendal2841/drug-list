@@ -12,6 +12,7 @@ export const mapStateToProps = (store: IStore): IStoreMedicineList => ({
 export const mapDispatchToProps: IDispatchMedicineList = {
     getMedicines: actions.getMedicines,
     addMedicine: actions.addMedicine,
+    deleteMedicine: actions.deleteMedicine,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicineList)

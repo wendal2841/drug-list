@@ -7,3 +7,7 @@ export const addMedicine = (payload: IMedicine): IAction<IMedicine> => ({
     type: MEDICINE.POST.REQUEST,
     payload,
 });
+export const deleteMedicine = (payload: string): IAction<string> => ({
+    type: MEDICINE.DELETE.REQUEST,
+    payload,
+});

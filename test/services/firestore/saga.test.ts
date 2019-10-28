@@ -4,7 +4,7 @@ import {
     IGetCollection,
     IPostCollection,
     TPutCollectionRequest,
-    TDeleteCollectionRequest
+    IDeleteCollection
 } from 'services/firestore/types';
 import RSF from 'services/firebase';
 import { firestoreSuccess } from 'services/firestore/actions';
@@ -84,19 +84,23 @@ describe('services => firestore => saga', () => {
 
     it('deleteDocument test', () => {
         //Given
-        const action: TDeleteCollectionRequest = {
-            type: 'FIRESTORE__DELETE__REQUEST',
-            payload: {
-                collection: 'collection'
-            }
+        const type = new RestActionType('FIRESTORE');
+        const action: IDeleteCollection = {
+            type,
+            collection: 'collection',
+            id: 'asdfasdfasdf',
         };
+        const expected = `${action.collection}/${action.id}`;
 
         //When
         const generator = saga.deleteDocument(action);
 
         //Then
         expect(generator.next().value).toEqual(
-            call(RSF.firestore.deleteDocument, action.payload.collection)
+            call(RSF.firestore.deleteDocument, expected)
+        );
+        expect(generator.next().value).toEqual(
+            put(firestoreSuccess(type.DELETE.SUCCESS, action.id))
         );
         expect(generator.next().done).toBeTruthy();
     });

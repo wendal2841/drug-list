@@ -1,7 +1,8 @@
 import { mount } from 'enzyme';
 import { MedicineRow } from 'components/medicine-row';
 import * as React from 'react';
-import { IMedicine } from 'entities/medicines/types';
+import sinon from 'sinon';
+import { IPropsMedicineRow } from 'components/medicine-row/types';
 
 jest.mock(
     'antd',
@@ -11,7 +12,8 @@ jest.mock(
 );
 
 describe('components => medicines-row', () => {
-    const defaultProps: IMedicine =  {
+    const defaultProps: IPropsMedicineRow =  {
+        id: 'asdfasdfasd',
         code: 'code',
         name: 'name',
         price: 100,
@@ -19,6 +21,7 @@ describe('components => medicines-row', () => {
         compositionAndFormOfRelease: 'compositionAndFormOfRelease',
         indication: 'indication',
         contraindications: 'contraindications',
+        deleteMedicine: sinon.spy(),
     };
 
     it.each`
@@ -80,13 +83,16 @@ describe('components => medicines-row', () => {
 
     it('Should render medicines-row__delete', () => {
         //Given
-        const wrapper = mount(<MedicineRow {...defaultProps} />);
+        const deleteMedicineSpy = sinon.spy();
+        const wrapper = mount(<MedicineRow {...defaultProps} deleteMedicine={deleteMedicineSpy} />);
+        const element = wrapper.find('.medicine-row__delete').at(0);
 
         //When
-        const element = wrapper.find('.medicine-row__delete').at(0);
+        element.prop<() => void>('onClick')();
 
         //Then
         expect(element.prop('type')).toEqual('danger');
         expect(element.text()).toEqual('Delete');
+        expect(deleteMedicineSpy.calledOnceWithExactly(defaultProps.id)).toBeTruthy();
     });
 });
