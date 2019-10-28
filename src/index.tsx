@@ -27,4 +27,3 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDom.render(<Routes store={store} history={history} />, document.getElementById('root'));
-
