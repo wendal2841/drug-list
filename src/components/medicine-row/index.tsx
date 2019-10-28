@@ -3,12 +3,12 @@ import { Button } from 'antd';
 import { IPropsMedicineRow } from './types';
 
 export const MedicineRow: React.FC<IPropsMedicineRow> = ({
-    id,
-    code,
-    name,
-    price,
+    medicine,
+    editMedicine,
     deleteMedicine,
 }): JSX.Element => {
+    const { id, code, name, price } = medicine;
+    const onEdit = (): void => editMedicine({ ...medicine, price: 200 });
     const onDelete = (): void => deleteMedicine(id || '');
 
     return (
@@ -16,7 +16,13 @@ export const MedicineRow: React.FC<IPropsMedicineRow> = ({
             <span className="medicine-row__code" >Code: { code }</span>
             <span className="medicine-row__name" >Name: { name }</span>
             <span className="medicine-row__price" >Price: { price }</span>
-            <Button className="medicine-row__edit" type="primary" >Edit</Button>
+            <Button
+                className="medicine-row__edit"
+                type="primary"
+                onClick={onEdit}
+            >
+                Edit
+            </Button>
             <Button
                 className="medicine-row__delete"
                 type="danger"

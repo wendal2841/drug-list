@@ -18,8 +18,9 @@ jest.mock(
 );
 
 describe('pages => medicines-list => component', () => {
-    const addMedicineSpy = sinon.spy();
     const getMedicinesSpy = sinon.spy();
+    const addMedicineSpy = sinon.spy();
+    const editMedicineSpy = sinon.spy();
     const deleteMedicineSpy = sinon.spy();
 
     const defaultProps: IPropsMedicineList = {
@@ -34,8 +35,9 @@ describe('pages => medicines-list => component', () => {
                 contraindications: 'contraindications',
             }
         ],
-        addMedicine: addMedicineSpy,
         getMedicines: getMedicinesSpy,
+        addMedicine: addMedicineSpy,
+        editMedicine: editMedicineSpy,
         deleteMedicine: deleteMedicineSpy,
     };
 
@@ -100,13 +102,8 @@ describe('pages => medicines-list => component', () => {
         const element = wrapper.find('.medicine-row');
 
         //Then
-        expect(element.at(0).prop('code')).toEqual(defaultProps.medicines[0].code);
-        expect(element.at(0).prop('name')).toEqual(defaultProps.medicines[0].name);
-        expect(element.at(0).prop('price')).toEqual(defaultProps.medicines[0].price);
-        expect(element.at(0).prop('shelfLife')).toEqual(defaultProps.medicines[0].shelfLife);
-        expect(element.at(0).prop('compositionAndFormOfRelease')).toEqual(defaultProps.medicines[0].compositionAndFormOfRelease);
-        expect(element.at(0).prop('indication')).toEqual(defaultProps.medicines[0].indication);
-        expect(element.at(0).prop('contraindications')).toEqual(defaultProps.medicines[0].contraindications);
+        expect(element.at(0).prop('medicine')).toEqual(defaultProps.medicines[0]);
+        expect(element.at(0).prop('editMedicine')).toEqual(defaultProps.editMedicine);
         expect(element.at(0).prop('deleteMedicine')).toEqual(defaultProps.deleteMedicine);
     });
 
