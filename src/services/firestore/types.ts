@@ -15,7 +15,11 @@ export interface IPostCollection<T> {
     collection: string,
     data: T
 }
-export type TPutCollectionRequest = IAction<{ collection: string, data: object }>;
+export interface IPutCollection<T> {
+    type: RestActionType,
+    collection: string,
+    data: T
+}
 export interface IDeleteCollection {
     type: RestActionType,
     collection: string,

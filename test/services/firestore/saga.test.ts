@@ -3,7 +3,7 @@ import * as saga from 'services/firestore/saga';
 import {
     IGetCollection,
     IPostCollection,
-    TPutCollectionRequest,
+    IPutCollection,
     IDeleteCollection
 } from 'services/firestore/types';
 import RSF from 'services/firebase';
@@ -62,22 +62,26 @@ describe('services => firestore => saga', () => {
 
     it('setDocument test', () => {
         //Given
-        const action: TPutCollectionRequest = {
-            type: 'FIRESTORE__PUT__REQUEST',
-            payload: {
-                collection: 'collection',
-                data: {
-                    name: 'name'
-                }
+        const type = new RestActionType('FIRESTORE');
+        const action: IPutCollection<{ id: string, name: string }> = {
+            type,
+            collection: 'collection',
+            data: {
+                id: 'adsfasdfasdf',
+                name: 'name'
             }
         };
+        const collection = `${action.collection}/${action.data.id}`;
 
         //When
         const generator = saga.setDocument(action);
 
         //Then
         expect(generator.next().value).toEqual(
-            call(RSF.firestore.setDocument, action.payload.collection, action.payload.data)
+            call(RSF.firestore.setDocument, collection, action.data)
+        );
+        expect(generator.next().value).toEqual(
+            put(firestoreSuccess(type.PUT.SUCCESS, action.data))
         );
         expect(generator.next().done).toBeTruthy();
     });
@@ -90,14 +94,14 @@ describe('services => firestore => saga', () => {
             collection: 'collection',
             id: 'asdfasdfasdf',
         };
-        const expected = `${action.collection}/${action.id}`;
+        const collection = `${action.collection}/${action.id}`;
 
         //When
         const generator = saga.deleteDocument(action);
 
         //Then
         expect(generator.next().value).toEqual(
-            call(RSF.firestore.deleteDocument, expected)
+            call(RSF.firestore.deleteDocument, collection)
         );
         expect(generator.next().value).toEqual(
             put(firestoreSuccess(type.DELETE.SUCCESS, action.id))

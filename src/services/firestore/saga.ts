@@ -2,10 +2,10 @@ import { SagaIterator } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import {
     IQueryDocumentSnapshot,
-    IDeleteCollection,
     IGetCollection,
     IPostCollection,
-    TPutCollectionRequest
+    IPutCollection,
+    IDeleteCollection,
 } from './types';
 import RSF from 'services/firebase';
 import { firestoreSuccess } from './actions';
@@ -24,8 +24,10 @@ export function* addDocument<T>({ type, collection, data }: IPostCollection<T>):
     yield put(firestoreSuccess(type.POST.SUCCESS, { id, ...data }));
 }
 
-export function* setDocument({ payload: { collection, data } }: TPutCollectionRequest): SagaIterator {
-    yield call(RSF.firestore.setDocument, collection, data);
+export function* setDocument<T extends { id: string }>({ type, collection, data }: IPutCollection<T>): SagaIterator {
+    yield call(RSF.firestore.setDocument, `${collection}/${data.id}`, data);
+
+    yield put(firestoreSuccess(type.PUT.SUCCESS, data));
 }
 
 export function* deleteDocument({ type, collection, id }: IDeleteCollection): SagaIterator {

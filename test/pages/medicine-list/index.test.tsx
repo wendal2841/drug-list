@@ -23,6 +23,7 @@ describe('pages => medicines-list', () => {
         const expected: IDispatchMedicineList = {
             getMedicines: actions.getMedicines,
             addMedicine: actions.addMedicine,
+            editMedicine: actions.editMedicine,
             deleteMedicine: actions.deleteMedicine,
         };
 

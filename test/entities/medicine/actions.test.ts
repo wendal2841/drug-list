@@ -39,6 +39,30 @@ describe('entities => medicines => actions', () => {
         expect(actual).toEqual(expected);
     });
 
+    it('editMedicine test', () => {
+        //Given
+        const payload: IMedicine = {
+            id: 'asdfasdfasdf',
+            code: 'code',
+            name: 'name',
+            price: 100,
+            shelfLife: 424352345,
+            compositionAndFormOfRelease: 'compositionAndFormOfRelease',
+            indication: 'indication',
+            contraindications: 'contraindications',
+        };
+        const expected: IAction<IMedicine> = {
+            type: 'MEDICINE__PUT__REQUEST',
+            payload,
+        };
+
+        //When
+        const actual = actions.editMedicine(payload);
+
+        //Then
+        expect(actual).toEqual(expected);
+    });
+
     it('deleteMedicine test', () => {
         //Given
         const id = 'dsafasdfasdf';

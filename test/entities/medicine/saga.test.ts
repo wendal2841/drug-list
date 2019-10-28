@@ -1,7 +1,7 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import * as saga from 'entities/medicines/saga';
 import { IGetMedicineRequest, IPostMedicineRequest, IDeleteMedicineRequest, IMedicine } from 'entities/medicines/types';
-import { getCollection, addDocument, deleteDocument } from 'services/firestore/saga';
+import { getCollection, addDocument, setDocument, deleteDocument } from 'services/firestore/saga';
 import { IGetCollection, IPostCollection, IDeleteCollection } from 'services/firestore/types';
 import { RestActionType } from 'utils/restActionType';
 import { IAction } from 'types';
@@ -17,6 +17,9 @@ describe('entities => medicines => saga', () => {
         );
         expect(generator.next().value).toEqual(
             takeEvery('MEDICINE__POST__REQUEST', saga.addMedicine as IPostMedicineRequest),
+        );
+        expect(generator.next().value).toEqual(
+            takeEvery('MEDICINE__PUT__REQUEST', saga.editMedicine as IPostMedicineRequest),
         );
         expect(generator.next().value).toEqual(
             takeEvery('MEDICINE__DELETE__REQUEST', saga.deleteMedicine as IDeleteMedicineRequest),
@@ -63,6 +66,35 @@ describe('entities => medicines => saga', () => {
 
         //Then
         expect(generator.next().value).toEqual(call(addDocument, data));
+        expect(generator.next().done).toBeTruthy();
+    });
+
+    it('editMedicine test', () => {
+        //Given
+        const action: IAction<IMedicine> = {
+            type: 'MEDICINE__PUT__REQUEST',
+            payload: {
+                id: 'asdfasdf',
+                code: 'code',
+                name: 'name',
+                price: 100,
+                shelfLife: 424352345,
+                compositionAndFormOfRelease: 'compositionAndFormOfRelease',
+                indication: 'indication',
+                contraindications: 'contraindications',
+            }
+        };
+        const data: IPostCollection<IMedicine> = {
+            type: new RestActionType('MEDICINE'),
+            collection: 'medicine',
+            data: action.payload
+        };
+
+        //When
+        const generator = saga.editMedicine(action);
+
+        //Then
+        expect(generator.next().value).toEqual(call(setDocument, data));
         expect(generator.next().done).toBeTruthy();
     });
 

@@ -15,4 +15,5 @@ export interface IStoreMedicines extends Array<IMedicine> {}
 
 export interface IGetMedicineRequest extends TSagaActionHandler<IActionBase> {}
 export interface IPostMedicineRequest extends TSagaActionHandler<IAction<IMedicine>> {}
+export interface IPutMedicineRequest extends TSagaActionHandler<IAction<IMedicine>> {}
 export interface IDeleteMedicineRequest extends TSagaActionHandler<IAction<string>> {}

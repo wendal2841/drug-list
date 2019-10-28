@@ -13,14 +13,17 @@ jest.mock(
 
 describe('components => medicines-row', () => {
     const defaultProps: IPropsMedicineRow =  {
-        id: 'asdfasdfasd',
-        code: 'code',
-        name: 'name',
-        price: 100,
-        shelfLife: 424352345,
-        compositionAndFormOfRelease: 'compositionAndFormOfRelease',
-        indication: 'indication',
-        contraindications: 'contraindications',
+        medicine: {
+            id: 'asdfasdfasd',
+            code: 'code',
+            name: 'name',
+            price: 100,
+            shelfLife: 424352345,
+            compositionAndFormOfRelease: 'compositionAndFormOfRelease',
+            indication: 'indication',
+            contraindications: 'contraindications',
+        },
+        editMedicine: sinon.spy(),
         deleteMedicine: sinon.spy(),
     };
 
@@ -71,14 +74,21 @@ describe('components => medicines-row', () => {
 
     it('Should render medicines-row__edit', () => {
         //Given
-        const wrapper = mount(<MedicineRow {...defaultProps} />);
+        const editMedicineSpy = sinon.spy();
+        const wrapper = mount(<MedicineRow {...defaultProps} editMedicine={editMedicineSpy} />);
+        const element = wrapper.find('.medicine-row__edit').at(0);
+        const expected = {
+            ...defaultProps.medicine,
+            price: 200,
+        };
 
         //When
-        const element = wrapper.find('.medicine-row__edit').at(0);
+        element.prop<() => void>('onClick')();
 
         //Then
         expect(element.prop('type')).toEqual('primary');
         expect(element.text()).toEqual('Edit');
+        expect(editMedicineSpy.calledOnceWithExactly(expected)).toBeTruthy();
     });
 
     it('Should render medicines-row__delete', () => {
@@ -93,6 +103,6 @@ describe('components => medicines-row', () => {
         //Then
         expect(element.prop('type')).toEqual('danger');
         expect(element.text()).toEqual('Delete');
-        expect(deleteMedicineSpy.calledOnceWithExactly(defaultProps.id)).toBeTruthy();
+        expect(deleteMedicineSpy.calledOnceWithExactly(defaultProps.medicine.id)).toBeTruthy();
     });
 });

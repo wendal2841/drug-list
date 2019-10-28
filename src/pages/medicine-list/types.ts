@@ -7,6 +7,7 @@ export interface IStoreMedicineList {
 export interface IDispatchMedicineList {
     getMedicines(): void;
     addMedicine(payload: IMedicine): void;
+    editMedicine(payload: IMedicine): void;
     deleteMedicine(id: string): void;
 }
 
