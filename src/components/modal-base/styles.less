@@ -1,0 +1,33 @@
+.modal-base {
+    display: flex;
+    flex-direction: column;
+    background-color: @white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px 0 @gray-dark-1-20;
+    border: solid 1px @gray-dark-1-10;
+
+    &__header {
+        .font-settings(Roboto-Medium, 18px, 500, normal, normal, normal, 0.2px);
+
+        height: 64px;
+        padding: 0 24px;
+        color: @gray-dark-1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .yofi-ic-close {
+            font-size: 24px;
+            color: @gray-dark-1-80;
+            cursor: pointer;
+        }
+    }
+
+    &__body {
+        .font-settings(Roboto-Regular, 14px, normal, normal, normal, 1.43, 0.2px);
+
+        padding: 0 24px;
+        color: @gray-dark-1;
+    }
+}

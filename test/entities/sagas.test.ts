@@ -1,11 +1,11 @@
 import { TSaga } from 'types';
 import { entitiesSaga } from 'entities/sagas';
-import apiDrug from 'entities/drug/saga';
+import apiMedicine from 'entities/medicine/saga';
 
 it('rootSaga test', () => {
     //Give
     const expected: TSaga[] = [
-        apiDrug,
+        apiMedicine,
     ];
 
     //Then

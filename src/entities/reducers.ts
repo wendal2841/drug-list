@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import drugReducer from './drug/reducer';
+import medicineReducer from './medicine/reducer';
 
 export const entitiesReducer = combineReducers({
-    drug: drugReducer,
+    medicine: medicineReducer,
 });

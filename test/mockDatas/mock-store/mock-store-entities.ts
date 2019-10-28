@@ -1,7 +1,7 @@
-import { IStoreEntities } from 'entities/tupes';
+import { IStoreEntities } from 'entities/types';
 
 export const mockStoreEntities: IStoreEntities = {
-    drug: {
-        drugs: [],
+    medicine: {
+        medicineList: [],
     }
 };

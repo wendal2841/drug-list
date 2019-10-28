@@ -28,6 +28,7 @@
             [
                 "components",
                 "entities",
+                "services",
                 "pages",
                 "utils",
                 "types",
@@ -65,8 +66,7 @@
         "newline-before-return": true,
         "object-curly-spacing": [true, "always"],
         "no-consecutive-blank-lines": true,
-        "indent": [true, "spaces", 4],
-        "no-default-export": true
+        "indent": [true, "spaces", 4]
     },
     "rulesDirectory": []
 }

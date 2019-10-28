@@ -1,0 +1,25 @@
+.font-settings(@family, @size, @weight, @style, @stretch, @line-height, @letter-spacing){
+    font-family: @family;
+    font-size: @size;
+    font-weight: @weight;
+    font-style: @style;
+    font-stretch: @stretch;
+    line-height: @line-height;
+    letter-spacing: @letter-spacing;
+}
+
+.scroll-custom(@color-track, @color-thumb, @scrollbar-width, @color-scrollbar: transparent, @border-radius: 0) {
+    &::-webkit-scrollbar-track {
+        background-color: @color-track;
+    }
+
+    &::-webkit-scrollbar {
+        width: @scrollbar-width;
+        background-color: @color-scrollbar;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: @color-thumb;
+        border-radius: @border-radius;
+    }
+}
