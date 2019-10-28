@@ -1,3 +1,4 @@
 import { IStore } from 'types';
+import { IMedicine } from './types';
 
-export const getMedicineList = (store: IStore) => store.entities.medicine.medicineList;
+export const getMedicineList = (store: IStore): IMedicine[] => store.entities.medicine.medicineList;

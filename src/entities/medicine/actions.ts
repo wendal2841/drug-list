@@ -1,4 +1,9 @@
-import { IActionBase } from 'types';
+import { IAction, IActionBase } from 'types';
 import { MEDICINE } from './constants';
+import { IMedicine } from './types';
 
 export const getMedicine = (): IActionBase => ({ type: MEDICINE.GET.REQUEST });
+export const addMedicine = (payload: IMedicine): IAction<IMedicine> => ({
+    type: MEDICINE.POST.REQUEST,
+    payload,
+});

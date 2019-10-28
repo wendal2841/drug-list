@@ -6,6 +6,10 @@ export interface IStoreMedicineList {
 
 export interface IDispatchMedicineList {
     getMedicine(): void;
+    addMedicine(payload: IMedicine): void;
 }
 
 export interface IPropsMedicineList extends IStoreMedicineList, IDispatchMedicineList {}
+export interface IStateMedicineList {
+    isOpenModalAdd: boolean;
+}

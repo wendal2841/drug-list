@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router';
 import { Provider } from 'react-redux';
 import MedicineList from 'pages/medicine-list';
 
-export const Routes: React.FC<IPropsRoutes> = ({ store, history }) => (
+export const Routes: React.FC<IPropsRoutes> = ({ store, history }): JSX.Element => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>

@@ -1,4 +1,4 @@
-import { IAction, TSagaActionHandler } from 'types';
+import { IAction, IActionBase, TSagaActionHandler } from 'types';
 
 export interface IMedicine {
     code: string;
@@ -11,7 +11,8 @@ export interface IMedicine {
 }
 
 export interface IStoreMedicine {
-    medicineList: IMedicine[]
+    medicineList: IMedicine[],
 }
 
-export interface IGetMedicine extends TSagaActionHandler<IAction<{  }>> {}
+export interface IGetMedicine extends TSagaActionHandler<IActionBase> {}
+export interface IPostMedicine extends TSagaActionHandler<IAction<IMedicine>> {}

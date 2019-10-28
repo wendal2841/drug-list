@@ -1,31 +1,33 @@
 import * as React from 'react';
-import { Button, List } from 'antd';
-import { IPropsMedicineList } from './types';
-import { medicineRow } from 'components/medicine-row';
+import { IPropsMedicineList, IStateMedicineList } from './types';
+import { MedicineRow } from 'components/medicine-row';
+import { AddMedicine } from 'components/add-medicine';
 
-export class MedicineList extends React.PureComponent<IPropsMedicineList> {
+export class MedicineList extends React.PureComponent<IPropsMedicineList, IStateMedicineList> {
+    state: IStateMedicineList = { isOpenModalAdd: false };
+
     constructor(props: IPropsMedicineList) {
         super(props);
 
         props.getMedicine();
     }
 
+    addMedicine = (): void => this.setState({ isOpenModalAdd: true });
+    onCloseModalAdd = (): void => this.setState({ isOpenModalAdd: false });
+
     render(): JSX.Element {
         const { medicineList } = this.props;
+        const { isOpenModalAdd } = this.state;
 
         return (
             <div className="medicine-list" >
-                <List
-                    itemLayout="horizontal"
-                    dataSource={medicineList}
-                    renderItem={medicineRow}
-                />
-                <Button
-                    className="medicine-list__add-medicine"
-                    type="primary"
-                >
-                    +
-                </Button>
+                {
+                    medicineList.map(it => (
+                        <MedicineRow key={it.code} {...it} />
+                    ))
+                }
+                <div className="add-medicine" onClick={this.addMedicine} >+</div>
+                <AddMedicine isOpen={isOpenModalAdd} onClose={this.onCloseModalAdd} />
             </div>
         )
     }
