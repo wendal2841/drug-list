@@ -3,8 +3,8 @@ import { SagaIterator } from 'redux-saga';
 import { IGetMedicineRequest, IMedicine, IPostMedicineRequest } from './types';
 import { IAction } from 'types';
 import { COLLECTION_PATH, MEDICINE } from './constants';
-import RSF from 'services/firebase';
-import { getCollection } from 'services/firestore/saga';
+import { addDocument, getCollection } from 'services/firestore/saga';
+import { IGetCollection, IPostCollection } from 'services/firestore/types';
 
 export default function* apiMedicine(): SagaIterator {
     yield takeEvery(MEDICINE.GET.REQUEST, getMedicines as IGetMedicineRequest);
@@ -12,13 +12,20 @@ export default function* apiMedicine(): SagaIterator {
 }
 
 export function* getMedicines(): SagaIterator {
-    const data = { type: MEDICINE, collection: COLLECTION_PATH };
+    const data: IGetCollection = {
+        type: MEDICINE,
+        collection: COLLECTION_PATH,
+    };
 
     yield call(getCollection, data);
 }
 
 export function* addMedicine({ payload }: IAction<IMedicine>): SagaIterator {
-    const docRef = yield call(RSF.firestore.addDocument, COLLECTION_PATH, payload);
+    const data: IPostCollection<IMedicine> = {
+        type: MEDICINE,
+        collection: COLLECTION_PATH,
+        data: payload,
+    };
 
-    console.log(docRef);
+    yield call(addDocument, data);
 }

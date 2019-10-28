@@ -10,8 +10,12 @@ export interface IGetCollection {
     type: RestActionType,
     collection: string,
 }
-export type TPostCollectionRequest = IAction<{ collection: string, data: object }>;
+export interface IPostCollection<T> {
+    type: RestActionType,
+    collection: string,
+    data: T
+}
 export type TPutCollectionRequest = IAction<{ collection: string, data: object }>;
 export type TDeleteCollectionRequest = IAction<{ collection: string }>;
 
-export type TGetCollectionSuccess = IAction<object>;
+export type TGetCollectionSuccess<T> = IAction<T>;

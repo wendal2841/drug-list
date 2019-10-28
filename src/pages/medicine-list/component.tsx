@@ -12,7 +12,21 @@ export class MedicineList extends React.PureComponent<IPropsMedicineList, IState
         props.getMedicines();
     }
 
-    addMedicine = (): void => this.setState({ isOpenModalAdd: true });
+    addMedicine = (): void => {
+        const { addMedicine } = this.props;
+
+        this.setState({ isOpenModalAdd: true });
+
+        addMedicine({
+            code: 'code',
+            name: 'name',
+            price: 100,
+            shelfLife: 424352345,
+            compositionAndFormOfRelease: 'compositionAndFormOfRelease',
+            indication: 'indication',
+            contraindications: 'contraindications',
+        });
+    };
     onCloseModalAdd = (): void => this.setState({ isOpenModalAdd: false });
 
     render(): JSX.Element {
@@ -23,7 +37,7 @@ export class MedicineList extends React.PureComponent<IPropsMedicineList, IState
             <div className="medicine-list" >
                 {
                     medicines.map(it => (
-                        <MedicineRow key={it.code} {...it} />
+                        <MedicineRow key={it.id} {...it} />
                     ))
                 }
                 <div className="add-medicine" onClick={this.addMedicine} >+</div>
