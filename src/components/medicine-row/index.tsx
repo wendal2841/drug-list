@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Button } from 'antd';
 import { IPropsMedicineRow } from './types';
 
-export const MedicineRow: React.FC<IPropsMedicineRow> = ({
+export const MedicineRow = React.memo(({
     medicine,
     editMedicine,
     deleteMedicine,
-}): JSX.Element => {
+}: IPropsMedicineRow) => {
     const { id, code, name, price } = medicine;
     const onEdit = (): void => editMedicine({ ...medicine, price: 200 });
     const onDelete = (): void => deleteMedicine(id || '');
@@ -36,4 +36,4 @@ export const MedicineRow: React.FC<IPropsMedicineRow> = ({
             </div>
         </div>
     );
-};
+});
