@@ -2,14 +2,56 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    margin: 5px 0;
+    border-bottom: solid 1px #ececec;
 
-    &__code {}
+    &:first-child {
+        margin: 0 0 5px 0;
+    }
 
-    &__name {}
+    &__content {
+        margin-left: 10px;
+    }
 
-    &__price {}
+    &__buttons {
+        margin-right: 10px;
+    }
 
-    &__edit {}
+    &__code {
+        padding-left: 10px;
+    }
 
-    &__delete {}
+    &__name, &__price {
+        padding-left: 25px;
+    }
+
+    &__delete {
+        margin-left: 5px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 579px) {
+    .medicine-row {
+        flex-direction: column;
+        align-items: inherit;
+        border-bottom: unset;
+
+        &__content, &__buttons {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        &__code, &__name, &__price, &__edit, &__delete {
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-left: 0;
+        }
+
+        &__delete {
+            margin-top: 5px;
+        }
+    }
 }

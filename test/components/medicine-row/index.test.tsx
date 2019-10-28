@@ -28,8 +28,9 @@ describe('components => medicines-row', () => {
     };
 
     it.each`
-        className          | count
-        ${'.medicine-row'} | ${1}
+        className                   | count
+        ${'.medicine-row__content'} | ${1}
+        ${'.medicine-row__buttons'} | ${1}
     `('should render $className $count times', ({ className, count }) => {
         //When
         const wrapper = mount(<MedicineRow {...defaultProps} />);
@@ -37,6 +38,23 @@ describe('components => medicines-row', () => {
 
         //Then
         expect(element).toHaveLength(count)
+    });
+
+    it('Should render medicine-row', () => {
+        //Given
+        const editMedicineSpy = sinon.spy();
+        const wrapper = mount(<MedicineRow {...defaultProps} editMedicine={editMedicineSpy}  />);
+        const element = wrapper.find('.medicine-row');
+        const expected = {
+            ...defaultProps.medicine,
+            price: 200,
+        };
+
+        //When
+        element.prop<() => void>('onDoubleClick')();
+
+        //Then
+        expect(editMedicineSpy.calledOnceWithExactly(expected)).toBeTruthy();
     });
 
     it('Should render medicines-row__code', () => {
