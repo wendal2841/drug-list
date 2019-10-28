@@ -1,15 +1,15 @@
-import * as selectors from 'entities/medicine/selectors';
+import * as selectors from 'entities/medicines/selectors';
 import { MockStore } from 'mockDatas/mock-store/mock-store';
 
-describe('entities => medicine => selectors', () => {
-    it('getMedicineList test', () => {
+describe('entities => medicines => selectors', () => {
+    it('getMedicines test', () => {
         //Given
         const mockStore = new MockStore();
 
         //When
-        const actual = selectors.getMedicineList(mockStore);
+        const actual = selectors.getMedicines(mockStore);
 
         //Then
-        expect(actual).toEqual(mockStore.entities.medicine.medicineList);
+        expect(actual).toEqual(mockStore.entities.medicines);
     });
 });

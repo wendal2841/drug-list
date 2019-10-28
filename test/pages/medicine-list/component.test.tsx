@@ -17,12 +17,12 @@ jest.mock(
     }),
 );
 
-describe('pages => medicine-list => component', () => {
+describe('pages => medicines-list => component', () => {
     const addMedicineSpy = sinon.spy();
-    const getMedicineSpy = sinon.spy();
+    const getMedicinesSpy = sinon.spy();
 
     const defaultProps: IPropsMedicineList = {
-        medicineList: [
+        medicines: [
             {
                 code: 'code',
                 name: 'name',
@@ -34,7 +34,7 @@ describe('pages => medicine-list => component', () => {
             }
         ],
         addMedicine: addMedicineSpy,
-        getMedicine: getMedicineSpy,
+        getMedicines: getMedicinesSpy,
     };
 
     it('constructor test', () => {
@@ -46,7 +46,7 @@ describe('pages => medicine-list => component', () => {
         const instance = wrapper.instance();
 
         //Then
-        expect(getMedicineSpy.calledOnce).toBeTruthy();
+        expect(getMedicinesSpy.calledOnce).toBeTruthy();
         expect(instance.state).toEqual(expectedState);
     });
 
@@ -98,16 +98,16 @@ describe('pages => medicine-list => component', () => {
         const element = wrapper.find('.medicine-row');
 
         //Then
-        expect(element.at(0).prop('code')).toEqual(defaultProps.medicineList[0].code);
-        expect(element.at(0).prop('name')).toEqual(defaultProps.medicineList[0].name);
-        expect(element.at(0).prop('price')).toEqual(defaultProps.medicineList[0].price);
-        expect(element.at(0).prop('shelfLife')).toEqual(defaultProps.medicineList[0].shelfLife);
-        expect(element.at(0).prop('compositionAndFormOfRelease')).toEqual(defaultProps.medicineList[0].compositionAndFormOfRelease);
-        expect(element.at(0).prop('indication')).toEqual(defaultProps.medicineList[0].indication);
-        expect(element.at(0).prop('contraindications')).toEqual(defaultProps.medicineList[0].contraindications);
+        expect(element.at(0).prop('code')).toEqual(defaultProps.medicines[0].code);
+        expect(element.at(0).prop('name')).toEqual(defaultProps.medicines[0].name);
+        expect(element.at(0).prop('price')).toEqual(defaultProps.medicines[0].price);
+        expect(element.at(0).prop('shelfLife')).toEqual(defaultProps.medicines[0].shelfLife);
+        expect(element.at(0).prop('compositionAndFormOfRelease')).toEqual(defaultProps.medicines[0].compositionAndFormOfRelease);
+        expect(element.at(0).prop('indication')).toEqual(defaultProps.medicines[0].indication);
+        expect(element.at(0).prop('contraindications')).toEqual(defaultProps.medicines[0].contraindications);
     });
 
-    it('should render add-medicine', () => {
+    it('should render add-medicines', () => {
         //Given
         const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
         const instance = wrapper.instance();
@@ -120,7 +120,7 @@ describe('pages => medicine-list => component', () => {
         expect(element.text()).toEqual('+');
     });
 
-    it('should render add-medicine-modal', () => {
+    it('should render add-medicines-modal', () => {
         //Given
         const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
         const instance = wrapper.instance();

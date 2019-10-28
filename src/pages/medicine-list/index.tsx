@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { IStore } from 'types';
 import { IStoreMedicineList, IDispatchMedicineList } from './types';
-import * as selectors from 'entities/medicine/selectors';
-import * as actions from 'entities/medicine/actions';
+import * as selectors from 'entities/medicines/selectors';
+import * as actions from 'entities/medicines/actions';
 import { MedicineList } from './component';
 
 export const mapStateToProps = (store: IStore): IStoreMedicineList => ({
-    medicineList: selectors.getMedicineList(store),
+    medicines: selectors.getMedicines(store),
 });
 
 export const mapDispatchToProps: IDispatchMedicineList = {
-    getMedicine: actions.getMedicine,
+    getMedicines: actions.getMedicines,
     addMedicine: actions.addMedicine,
 };
 

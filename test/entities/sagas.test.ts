@@ -1,8 +1,8 @@
 import { TSaga } from 'types';
 import { entitiesSaga } from 'entities/sagas';
-import apiMedicine from 'entities/medicine/saga';
+import apiMedicine from 'entities/medicines/saga';
 
-it('rootSaga test', () => {
+it('entitiesSaga test', () => {
     //Give
     const expected: TSaga[] = [
         apiMedicine,

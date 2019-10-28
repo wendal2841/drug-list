@@ -1,5 +1,5 @@
 import { TSaga } from 'types';
-import apiMedicine from './medicine/saga';
+import apiMedicine from './medicines/saga';
 
 export const entitiesSaga: TSaga[] = [
     apiMedicine,

@@ -11,7 +11,7 @@ jest.mock(
     }),
 );
 
-describe('components => add-medicine', () => {
+describe('components => add-medicines', () => {
     const defaultProps: IPropsAddMedicine = {
         isOpen: false,
         onClose: sinon.spy(),

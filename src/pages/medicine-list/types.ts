@@ -1,11 +1,11 @@
-import { IMedicine } from 'entities/medicine/types';
+import { IMedicine } from 'entities/medicines/types';
 
 export interface IStoreMedicineList {
-    medicineList: IMedicine[];
+    medicines: IMedicine[];
 }
 
 export interface IDispatchMedicineList {
-    getMedicine(): void;
+    getMedicines(): void;
     addMedicine(payload: IMedicine): void;
 }
 
