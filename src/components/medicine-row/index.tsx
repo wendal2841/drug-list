@@ -1,13 +1,29 @@
 import * as React from 'react';
-import { IMedicine } from 'entities/medicines/types';
 import { Button } from 'antd';
+import { IPropsMedicineRow } from './types';
 
-export const MedicineRow: React.FC<IMedicine> = ({ code, name, price }): JSX.Element => (
-    <div className="medicine-row" >
-        <span className="medicine-row__code" >Code: { code }</span>
-        <span className="medicine-row__name" >Name: { name }</span>
-        <span className="medicine-row__price" >Price: { price }</span>
-        <Button className="medicine-row__edit" type="primary" >Edit</Button>
-        <Button className="medicine-row__delete" type="danger">Delete</Button>
-    </div>
-);
+export const MedicineRow: React.FC<IPropsMedicineRow> = ({
+    id,
+    code,
+    name,
+    price,
+    deleteMedicine,
+}): JSX.Element => {
+    const onDelete = (): void => deleteMedicine(id || '');
+
+    return (
+        <div className="medicine-row" >
+            <span className="medicine-row__code" >Code: { code }</span>
+            <span className="medicine-row__name" >Name: { name }</span>
+            <span className="medicine-row__price" >Price: { price }</span>
+            <Button className="medicine-row__edit" type="primary" >Edit</Button>
+            <Button
+                className="medicine-row__delete"
+                type="danger"
+                onClick={onDelete}
+            >
+                Delete
+            </Button>
+        </div>
+    );
+};

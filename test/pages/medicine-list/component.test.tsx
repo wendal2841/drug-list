@@ -20,6 +20,7 @@ jest.mock(
 describe('pages => medicines-list => component', () => {
     const addMedicineSpy = sinon.spy();
     const getMedicinesSpy = sinon.spy();
+    const deleteMedicineSpy = sinon.spy();
 
     const defaultProps: IPropsMedicineList = {
         medicines: [
@@ -35,6 +36,7 @@ describe('pages => medicines-list => component', () => {
         ],
         addMedicine: addMedicineSpy,
         getMedicines: getMedicinesSpy,
+        deleteMedicine: deleteMedicineSpy,
     };
 
     it('constructor test', () => {
@@ -105,6 +107,7 @@ describe('pages => medicines-list => component', () => {
         expect(element.at(0).prop('compositionAndFormOfRelease')).toEqual(defaultProps.medicines[0].compositionAndFormOfRelease);
         expect(element.at(0).prop('indication')).toEqual(defaultProps.medicines[0].indication);
         expect(element.at(0).prop('contraindications')).toEqual(defaultProps.medicines[0].contraindications);
+        expect(element.at(0).prop('deleteMedicine')).toEqual(defaultProps.deleteMedicine);
     });
 
     it('should render add-medicines', () => {

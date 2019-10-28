@@ -38,4 +38,19 @@ describe('entities => medicines => actions', () => {
         //Then
         expect(actual).toEqual(expected);
     });
+
+    it('deleteMedicine test', () => {
+        //Given
+        const id = 'dsafasdfasdf';
+        const expected: IAction<string> = {
+            type: 'MEDICINE__DELETE__REQUEST',
+            payload: id,
+        };
+
+        //When
+        const actual = actions.deleteMedicine(id);
+
+        //Then
+        expect(actual).toEqual(expected);
+    });
 });

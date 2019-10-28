@@ -1,8 +1,8 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import * as saga from 'entities/medicines/saga';
-import { IGetMedicineRequest, IPostMedicineRequest, IMedicine } from 'entities/medicines/types';
-import { getCollection, addDocument } from 'services/firestore/saga';
-import { IGetCollection, IPostCollection } from 'services/firestore/types';
+import { IGetMedicineRequest, IPostMedicineRequest, IDeleteMedicineRequest, IMedicine } from 'entities/medicines/types';
+import { getCollection, addDocument, deleteDocument } from 'services/firestore/saga';
+import { IGetCollection, IPostCollection, IDeleteCollection } from 'services/firestore/types';
 import { RestActionType } from 'utils/restActionType';
 import { IAction } from 'types';
 
@@ -17,6 +17,9 @@ describe('entities => medicines => saga', () => {
         );
         expect(generator.next().value).toEqual(
             takeEvery('MEDICINE__POST__REQUEST', saga.addMedicine as IPostMedicineRequest),
+        );
+        expect(generator.next().value).toEqual(
+            takeEvery('MEDICINE__DELETE__REQUEST', saga.deleteMedicine as IDeleteMedicineRequest),
         );
         expect(generator.next().done).toBeTruthy();
     });
@@ -60,6 +63,26 @@ describe('entities => medicines => saga', () => {
 
         //Then
         expect(generator.next().value).toEqual(call(addDocument, data));
+        expect(generator.next().done).toBeTruthy();
+    });
+
+    it('deleteMedicine test', () => {
+        //Given
+        const action: IAction<string> = {
+            type: 'MEDICINE__DELETE__REQUEST',
+            payload: 'sdfasdfasdfasdf'
+        };
+        const data: IDeleteCollection = {
+            type: new RestActionType('MEDICINE'),
+            collection: 'medicine',
+            id: action.payload
+        };
+
+        //When
+        const generator = saga.deleteMedicine(action);
+
+        //Then
+        expect(generator.next().value).toEqual(call(deleteDocument, data));
         expect(generator.next().done).toBeTruthy();
     });
 });
