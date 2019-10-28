@@ -4,7 +4,7 @@ import { TSaga } from 'types';
 import { entitiesSaga } from './entities/sagas';
 
 export const sagas: TSaga[] = [
-    ...entitiesSaga
+    ...entitiesSaga,
 ];
 
 export function* rootSaga(): SagaIterator {

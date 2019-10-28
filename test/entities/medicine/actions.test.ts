@@ -1,16 +1,16 @@
-import * as actions from 'entities/medicine/actions';
+import * as actions from 'entities/medicines/actions';
 import { IAction, IActionBase } from 'types';
-import { IMedicine } from 'entities/medicine/types';
+import { IMedicine } from 'entities/medicines/types';
 
-describe('entities => medicine => actions', () => {
-    it('getMedicine test', () => {
+describe('entities => medicines => actions', () => {
+    it('getMedicines test', () => {
         //Given
         const expected: IActionBase = {
             type: 'MEDICINE__GET__REQUEST'
         };
 
         //When
-        const actual = actions.getMedicine();
+        const actual = actions.getMedicines();
 
         //Then
         expect(actual).toEqual(expected);

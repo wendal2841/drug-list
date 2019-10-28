@@ -1,14 +1,14 @@
 import { mapStateToProps, mapDispatchToProps } from 'pages/medicine-list';
 import { IStoreMedicineList, IDispatchMedicineList } from 'pages/medicine-list/types';
-import * as actions from 'entities/medicine/actions';
+import * as actions from 'entities/medicines/actions';
 import { MockStore } from 'mockDatas/mock-store/mock-store';
 
-describe('pages => medicine-list', () => {
+describe('pages => medicines-list', () => {
     it('mapStateToProps test', () => {
         //Given
         const mockStore = new MockStore();
         const expected: IStoreMedicineList = {
-            medicineList: mockStore.entities.medicine.medicineList,
+            medicines: mockStore.entities.medicines,
         };
 
         //Then
@@ -21,7 +21,7 @@ describe('pages => medicine-list', () => {
     it('mapDispatchToProps test', () => {
         //Given
         const expected: IDispatchMedicineList = {
-            getMedicine: actions.getMedicine,
+            getMedicines: actions.getMedicines,
             addMedicine: actions.addMedicine,
         };
 

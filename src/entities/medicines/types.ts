@@ -10,9 +10,7 @@ export interface IMedicine {
     contraindications: string;
 }
 
-export interface IStoreMedicine {
-    medicineList: IMedicine[],
-}
+export interface IStoreMedicines extends Array<IMedicine> {}
 
-export interface IGetMedicine extends TSagaActionHandler<IActionBase> {}
-export interface IPostMedicine extends TSagaActionHandler<IAction<IMedicine>> {}
+export interface IGetMedicineRequest extends TSagaActionHandler<IActionBase> {}
+export interface IPostMedicineRequest extends TSagaActionHandler<IAction<IMedicine>> {}

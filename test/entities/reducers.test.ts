@@ -1,12 +1,12 @@
 import * as redux from 'redux';
 import sinon from 'sinon';
-import medicineReducer from 'entities/medicine/reducer';
+import medicineReducer from 'entities/medicines/reducer';
 
 it('entitiesReducer test', () => {
     //Given
     const combineReducersSpy = sinon.spy(redux, 'combineReducers');
     const expected = {
-        medicine: medicineReducer,
+        medicines: medicineReducer,
     };
 
     //When

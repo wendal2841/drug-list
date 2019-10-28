@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { MedicineRow } from 'components/medicine-row';
 import * as React from 'react';
-import { IMedicine } from 'entities/medicine/types';
+import { IMedicine } from 'entities/medicines/types';
 
 jest.mock(
     'antd',
@@ -10,7 +10,7 @@ jest.mock(
     }),
 );
 
-describe('components => medicine-row', () => {
+describe('components => medicines-row', () => {
     const defaultProps: IMedicine =  {
         code: 'code',
         name: 'name',
@@ -33,7 +33,7 @@ describe('components => medicine-row', () => {
         expect(element).toHaveLength(count)
     });
 
-    it('Should render medicine-row__code', () => {
+    it('Should render medicines-row__code', () => {
         //Given
         const wrapper = mount(<MedicineRow {...defaultProps} />);
 
@@ -44,7 +44,7 @@ describe('components => medicine-row', () => {
         expect(element.text()).toEqual('Code: code');
     });
 
-    it('Should render medicine-row__name', () => {
+    it('Should render medicines-row__name', () => {
         //Given
         const wrapper = mount(<MedicineRow {...defaultProps} />);
 
@@ -55,7 +55,7 @@ describe('components => medicine-row', () => {
         expect(element.text()).toEqual('Name: name');
     });
 
-    it('Should render medicine-row__price', () => {
+    it('Should render medicines-row__price', () => {
         //Given
         const wrapper = mount(<MedicineRow {...defaultProps} />);
 
@@ -66,7 +66,7 @@ describe('components => medicine-row', () => {
         expect(element.text()).toEqual('Price: 100');
     });
 
-    it('Should render medicine-row__edit', () => {
+    it('Should render medicines-row__edit', () => {
         //Given
         const wrapper = mount(<MedicineRow {...defaultProps} />);
 
@@ -78,7 +78,7 @@ describe('components => medicine-row', () => {
         expect(element.text()).toEqual('Edit');
     });
 
-    it('Should render medicine-row__delete', () => {
+    it('Should render medicines-row__delete', () => {
         //Given
         const wrapper = mount(<MedicineRow {...defaultProps} />);
 

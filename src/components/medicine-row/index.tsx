@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IMedicine } from 'entities/medicine/types';
+import { IMedicine } from 'entities/medicines/types';
 import { Button } from 'antd';
 
 export const MedicineRow: React.FC<IMedicine> = ({ code, name, price }): JSX.Element => (
