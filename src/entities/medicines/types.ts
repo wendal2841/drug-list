@@ -1,6 +1,7 @@
 import { IAction, IActionBase, TSagaActionHandler } from 'types';
 
 export interface IMedicine {
+    id?: string;
     code: string;
     name: string;
     price: number;

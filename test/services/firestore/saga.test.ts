@@ -2,12 +2,12 @@ import { call, put } from 'redux-saga/effects';
 import * as saga from 'services/firestore/saga';
 import {
     IGetCollection,
-    TPostCollectionRequest,
+    IPostCollection,
     TPutCollectionRequest,
     TDeleteCollectionRequest
 } from 'services/firestore/types';
 import RSF from 'services/firebase';
-import { getFirestoreSuccess } from 'services/firestore/actions';
+import { firestoreSuccess } from 'services/firestore/actions';
 import { RestActionType } from 'utils/restActionType';
 
 describe('services => firestore => saga', () => {
@@ -30,32 +30,34 @@ describe('services => firestore => saga', () => {
             call(RSF.firestore.getCollection, action.collection)
         );
         expect(generator.next({ docs }).value).toEqual(
-            put(getFirestoreSuccess(type, expected))
+            put(firestoreSuccess(type.GET.SUCCESS, expected))
         );
         expect(generator.next().done).toBeTruthy();
     });
 
     it('addDocument test', () => {
         //Given
-        const action: TPostCollectionRequest = {
-            type: 'FIRESTORE__POST__REQUEST',
-            payload: {
-                collection: 'collection',
-                data: {
-                    name: 'name'
-                }
+        const type = new RestActionType('FIRESTORE');
+        const action: IPostCollection<{ name: string }> = {
+            type,
+            collection: 'collection',
+            data: {
+                name: 'name'
             }
         };
-        const docRef = 'docRef';
+        const id = 'adsfasdfasdf';
 
         //When
         const generator = saga.addDocument(action);
 
         //Then
         expect(generator.next().value).toEqual(
-            call(RSF.firestore.addDocument, action.payload.collection, action.payload.data)
+            call(RSF.firestore.addDocument, action.collection, action.data)
         );
-        expect(generator.next(docRef).done).toBeTruthy();
+        expect(generator.next({ id }).value).toEqual(
+            put(firestoreSuccess(type.POST.SUCCESS, { id, ...action.data }))
+        );
+        expect(generator.next().done).toBeTruthy();
     });
 
     it('setDocument test', () => {

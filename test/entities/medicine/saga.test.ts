@@ -1,11 +1,10 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import * as saga from 'entities/medicines/saga';
 import { IGetMedicineRequest, IPostMedicineRequest, IMedicine } from 'entities/medicines/types';
+import { getCollection, addDocument } from 'services/firestore/saga';
+import { IGetCollection, IPostCollection } from 'services/firestore/types';
+import { RestActionType } from 'utils/restActionType';
 import { IAction } from 'types';
-import RSF from 'services/firebase';
-import { COLLECTION_PATH } from 'entities/medicines/constants';
-import { getCollection } from 'services/firestore/saga';
-import { MEDICINE } from 'entities/medicines/constants';
 
 describe('entities => medicines => saga', () => {
     it('apiMedicine test', () => {
@@ -19,6 +18,20 @@ describe('entities => medicines => saga', () => {
         expect(generator.next().value).toEqual(
             takeEvery('MEDICINE__POST__REQUEST', saga.addMedicine as IPostMedicineRequest),
         );
+        expect(generator.next().done).toBeTruthy();
+    });
+
+    it('getMedicines test', () => {
+        const data: IGetCollection = {
+            type: new RestActionType('MEDICINE'),
+            collection: 'medicine',
+        };
+
+        //When
+        const generator = saga.getMedicines();
+
+        //Then
+        expect(generator.next().value).toEqual(call(getCollection, data));
         expect(generator.next().done).toBeTruthy();
     });
 
@@ -36,23 +49,17 @@ describe('entities => medicines => saga', () => {
                 contraindications: 'contraindications',
             }
         };
+        const data: IPostCollection<IMedicine> = {
+            type: new RestActionType('MEDICINE'),
+            collection: 'medicine',
+            data: action.payload
+        };
 
         //When
         const generator = saga.addMedicine(action);
 
         //Then
-        expect(generator.next().value).toEqual(call(RSF.firestore.addDocument, COLLECTION_PATH, action.payload));
-        expect(generator.next().done).toBeTruthy();
-    });
-
-    it('getMedicines test', () => {
-        const data = { type: MEDICINE, collection: COLLECTION_PATH };
-
-        //When
-        const generator = saga.getMedicines();
-
-        //Then
-        expect(generator.next().value).toEqual(call(getCollection, data));
+        expect(generator.next().value).toEqual(call(addDocument, data));
         expect(generator.next().done).toBeTruthy();
     });
 });
