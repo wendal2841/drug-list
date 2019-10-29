@@ -18,3 +18,13 @@ export interface IStateAddMedicine {
 }
 
 export interface IFormikMedicineValue extends IMedicine {}
+
+export interface IFormikMedicineError {
+    code?: string;
+    name?: string;
+    price?: string;
+    shelfLife?: string;
+    compositionAndFormOfRelease?: string;
+    indication?: string;
+    contraindications?: string;
+}

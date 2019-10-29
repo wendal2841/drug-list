@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IPropsStepTwo, IPropsStepTwoFormik } from './types';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import { connect } from 'formik';
 import { IFormikMedicineValue } from 'components/add-medicine/types';
 import { FIELDS, ROWS, VALIDATION } from './constants';
@@ -8,7 +8,11 @@ const { TextArea } = Input;
 
 export class StepTwo extends React.PureComponent<IPropsStepTwo> {
     onSave = (): void => {
-        const { formik: { handleSubmit } } = this.props;
+        const { formik: { handleSubmit, errors } } = this.props;
+
+        Object
+            .entries(errors)
+            .forEach(([key, value]) => value !== undefined && message.error(value));
 
         handleSubmit();
     };

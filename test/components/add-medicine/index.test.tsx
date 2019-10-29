@@ -4,6 +4,7 @@ import { IPropsAddMedicine } from 'components/add-medicine/types';
 import { mount } from 'enzyme';
 import { AddMedicine } from 'components/add-medicine';
 import { STEP } from 'components/add-medicine/types';
+import { validate } from 'components/add-medicine/validate';
 
 jest.mock(
     'components/modal-base',
@@ -196,6 +197,7 @@ describe('components => add-medicines', () => {
 
         //Then
         expect(element.prop('initialValues')).toEqual(initialValues);
+        expect(element.prop('validate')).toEqual(validate);
         expect(element.prop('onSubmit')).toEqual(instance.onSubmit);
     });
 
@@ -218,6 +220,7 @@ describe('components => add-medicines', () => {
 
         //Then
         expect(element.prop('initialValues')).toEqual(medicine);
+        expect(element.prop('validate')).toEqual(validate);
         expect(element.prop('onSubmit')).toEqual(instance.onSubmit);
     });
 
