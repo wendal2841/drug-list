@@ -3,6 +3,7 @@ import { IPropsStepTwo, IPropsStepTwoFormik } from './types';
 import { Button, Input } from 'antd';
 import { connect } from 'formik';
 import { IFormikMedicineValue } from 'components/add-medicine/types';
+import { FIELDS, ROWS, VALIDATION } from './constants';
 const { TextArea } = Input;
 
 export class StepTwo extends React.PureComponent<IPropsStepTwo> {
@@ -31,33 +32,33 @@ export class StepTwo extends React.PureComponent<IPropsStepTwo> {
                 <div className="step-two__composition_and_form_of_release" >
                     <span>Composition and release form:</span>
                     <TextArea
-                        name="compositionAndFormOfRelease"
+                        name={FIELDS.COMPOSITION_AND_FORM_OF_RELEASE}
                         value={compositionAndFormOfRelease}
-                        minLength={0}
-                        maxLength={2000}
-                        rows={4}
+                        minLength={VALIDATION.COMPOSITION_AND_FORM_OF_RELEASE.min}
+                        maxLength={VALIDATION.COMPOSITION_AND_FORM_OF_RELEASE.max}
+                        rows={ROWS}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="step-two__indication" >
                     <span>Indication:</span>
                     <TextArea
-                        name="indication"
+                        name={FIELDS.INDICATION}
                         value={indication}
-                        minLength={0}
-                        maxLength={2000}
-                        rows={4}
+                        minLength={VALIDATION.INDICATION.min}
+                        maxLength={VALIDATION.INDICATION.max}
+                        rows={ROWS}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="step-two__contraindications" >
                     <span>Contraindication:</span>
                     <TextArea
-                        name="contraindications"
+                        name={FIELDS.CONTRAINDICATIONS}
                         value={contraindications}
-                        minLength={0}
-                        maxLength={2000}
-                        rows={4}
+                        minLength={VALIDATION.CONTRAINDICATIONS.min}
+                        maxLength={VALIDATION.CONTRAINDICATIONS.max}
+                        rows={ROWS}
                         onChange={handleChange}
                     />
                 </div>

@@ -3,6 +3,7 @@ import { IPropsStepOne, IPropsStepOneFormik } from './types';
 import { Button, Input, InputNumber } from 'antd';
 import { IFormikMedicineValue } from 'components/add-medicine/types';
 import { connect } from 'formik';
+import { FIELDS, VALIDATION } from './constants';
 
 export class StepOne extends React.PureComponent<IPropsStepOne> {
     onChangePrice = (value: number | undefined): void => {
@@ -37,40 +38,40 @@ export class StepOne extends React.PureComponent<IPropsStepOne> {
                 <div className="step-one__code" >
                     <span>Code:</span>
                     <Input
-                        name="code"
+                        name={FIELDS.CODE}
                         value={code}
-                        minLength={5}
-                        maxLength={10}
+                        minLength={VALIDATION.CODE.min}
+                        maxLength={VALIDATION.CODE.max}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="step-one__name" >
                     <span>Name:</span>
                     <Input
-                        name="name"
+                        name={FIELDS.NAME}
                         value={name}
-                        minLength={5}
-                        maxLength={100}
+                        minLength={VALIDATION.NAME.min}
+                        maxLength={VALIDATION.NAME.max}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="step-one__price" >
                     <span>Price:</span>
                     <InputNumber
-                        name="price"
+                        name={FIELDS.PRICE}
                         value={price}
-                        min={0.01}
-                        max={1000000}
+                        min={VALIDATION.PRICE.min}
+                        max={VALIDATION.PRICE.max}
                         onChange={this.onChangePrice}
                     />
                 </div>
                 <div className="step-one__shelf-life" >
                     <span>Expiration date:</span>
                     <InputNumber
-                        name="shelfLife"
+                        name={FIELDS.SHELF_LIFE}
                         value={shelfLife}
-                        min={1}
-                        max={1000}
+                        min={VALIDATION.SHELF_LIFE.min}
+                        max={VALIDATION.SHELF_LIFE.max}
                         onChange={this.onChangeShelfLife}
                     />
                 </div>
