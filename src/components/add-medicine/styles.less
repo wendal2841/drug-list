@@ -1,8 +1,17 @@
-@import (less) './components/step-one/styles.less';
-@import (less) './components/step-two/styles.less';
-
 .modal-base {
     &__body {
+        width: 450px;
         margin-bottom: 15px;
+
+        @import (less) './components/step-one/styles.less';
+        @import (less) './components/step-two/styles.less';
+    }
+}
+
+@media (min-width: 320px) and (max-width: 579px) {
+    .modal-base {
+        &__body {
+            width: unset;
+        }
     }
 }
