@@ -13,5 +13,6 @@ export interface IDispatchMedicineList {
 
 export interface IPropsMedicineList extends IStoreMedicineList, IDispatchMedicineList {}
 export interface IStateMedicineList {
+    selectedMedicine?: IMedicine;
     isOpenModalAdd: boolean;
 }

@@ -80,30 +80,63 @@ describe('pages => medicines-list => component', () => {
         expect(setStateSpy.calledOnceWithExactly({ isOpenModalAdd: true })).toBeTruthy();
     });
 
+    it('onEditMedicine test', () => {
+        //Given
+        const setStateSpy = sinon.spy();
+        const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
+        const instance = wrapper.instance();
+        sinon.replace(instance, 'setState', setStateSpy);
+        const selectedMedicine = {
+            id: 'id',
+            code: 'code',
+            name: 'name',
+            price: 100,
+            shelfLife: 424352345,
+            compositionAndFormOfRelease: 'compositionAndFormOfRelease',
+            indication: 'indication',
+            contraindications: 'contraindications',
+        };
+        const expected = {
+            isOpenModalAdd: true,
+            selectedMedicine,
+        };
+
+        //When
+        instance.onEditMedicine(selectedMedicine);
+
+        //Then
+        expect(setStateSpy.calledOnceWithExactly(expected)).toBeTruthy();
+    });
+
     it('onCloseModalAdd test', () => {
         //Given
         const setStateSpy = sinon.spy();
         const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
         const instance = wrapper.instance();
         sinon.replace(instance, 'setState', setStateSpy);
+        const expected = {
+            isOpenModalAdd: false,
+            selectedMedicine: undefined,
+        };
 
         //When
         instance.onCloseModalAdd();
 
         //Then
-        expect(setStateSpy.calledOnceWithExactly({ isOpenModalAdd: false })).toBeTruthy();
+        expect(setStateSpy.calledOnceWithExactly(expected)).toBeTruthy();
     });
 
     it('should render List', () => {
         //Given
         const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
+        const instance = wrapper.instance();
 
         //When
         const element = wrapper.find('.medicine-row');
 
         //Then
         expect(element.at(0).prop('medicine')).toEqual(defaultProps.medicines[0]);
-        expect(element.at(0).prop('editMedicine')).toEqual(defaultProps.editMedicine);
+        expect(element.at(0).prop('editMedicine')).toEqual(instance.onEditMedicine);
         expect(element.at(0).prop('deleteMedicine')).toEqual(defaultProps.deleteMedicine);
     });
 
@@ -130,6 +163,9 @@ describe('pages => medicines-list => component', () => {
 
         //Then
         expect(element.prop('isOpen')).toEqual(instance.state.isOpenModalAdd);
+        expect(element.prop('medicine')).toEqual(instance.state.selectedMedicine);
+        expect(element.prop('addMedicine')).toEqual(defaultProps.addMedicine);
+        expect(element.prop('editMedicine')).toEqual(defaultProps.editMedicine);
         expect(element.prop('onClose')).toEqual(instance.onCloseModalAdd);
     });
 });

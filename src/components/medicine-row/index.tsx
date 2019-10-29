@@ -8,7 +8,7 @@ export const MedicineRow = React.memo(({
     deleteMedicine,
 }: IPropsMedicineRow) => {
     const { id, code, name, price } = medicine;
-    const onEdit = (): void => editMedicine({ ...medicine, price: 200 });
+    const onEdit = (): void => editMedicine(medicine);
     const onDelete = (): void => deleteMedicine(id || '');
 
     return (

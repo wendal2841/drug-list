@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IPropsMedicineList, IStateMedicineList } from './types';
 import { MedicineRow } from 'components/medicine-row';
 import { AddMedicine } from 'components/add-medicine';
+import { IMedicine } from 'entities/medicines/types';
 
 export class MedicineList extends React.PureComponent<IPropsMedicineList, IStateMedicineList> {
     state: IStateMedicineList = { isOpenModalAdd: false };
@@ -12,26 +13,20 @@ export class MedicineList extends React.PureComponent<IPropsMedicineList, IState
         props.getMedicines();
     }
 
-    addMedicine = (): void => {
-        const { addMedicine } = this.props;
+    addMedicine = (): void => this.setState({ isOpenModalAdd: true });
+    onEditMedicine = (selectedMedicine: IMedicine): void => this.setState({
+        isOpenModalAdd: true,
+        selectedMedicine,
+    });
 
-        this.setState({ isOpenModalAdd: true });
-
-        addMedicine({
-            code: 'code',
-            name: 'name',
-            price: 100,
-            shelfLife: 424352345,
-            compositionAndFormOfRelease: 'compositionAndFormOfRelease',
-            indication: 'indication',
-            contraindications: 'contraindications',
-        });
-    };
-    onCloseModalAdd = (): void => this.setState({ isOpenModalAdd: false });
+    onCloseModalAdd = (): void => this.setState({
+        isOpenModalAdd: false,
+        selectedMedicine: undefined
+    });
 
     render(): JSX.Element {
-        const { medicines, deleteMedicine, editMedicine } = this.props;
-        const { isOpenModalAdd } = this.state;
+        const { medicines, deleteMedicine, addMedicine, editMedicine } = this.props;
+        const { isOpenModalAdd, selectedMedicine } = this.state;
 
         return (
             <div className="medicine-list" >
@@ -40,13 +35,19 @@ export class MedicineList extends React.PureComponent<IPropsMedicineList, IState
                         <MedicineRow
                             key={it.id}
                             medicine={it}
-                            editMedicine={editMedicine}
+                            editMedicine={this.onEditMedicine}
                             deleteMedicine={deleteMedicine}
                         />
                     ))
                 }
                 <div className="add-medicine" onClick={this.addMedicine} >+</div>
-                <AddMedicine isOpen={isOpenModalAdd} onClose={this.onCloseModalAdd} />
+                <AddMedicine
+                    isOpen={isOpenModalAdd}
+                    medicine={selectedMedicine}
+                    addMedicine={addMedicine}
+                    editMedicine={editMedicine}
+                    onClose={this.onCloseModalAdd}
+                />
             </div>
         )
     }

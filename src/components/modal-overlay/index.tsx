@@ -50,7 +50,7 @@ export class ModalOverlay extends React.PureComponent<IPropsModalOverlay> {
 
         return ReactDOM.createPortal(
             <TransitionWrapper isOpen={isOpen}>
-                <div className={overlayClassName} onClick={this.onClose}>
+                <div className={overlayClassName} >
                     { children }
                 </div>
             </TransitionWrapper>,
