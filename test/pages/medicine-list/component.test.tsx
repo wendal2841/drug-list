@@ -129,13 +129,14 @@ describe('pages => medicines-list => component', () => {
     it('should render List', () => {
         //Given
         const wrapper = mount<MedicineList>(<MedicineList {...defaultProps} />);
+        const instance = wrapper.instance();
 
         //When
         const element = wrapper.find('.medicine-row');
 
         //Then
         expect(element.at(0).prop('medicine')).toEqual(defaultProps.medicines[0]);
-        expect(element.at(0).prop('editMedicine')).toEqual(defaultProps.editMedicine);
+        expect(element.at(0).prop('editMedicine')).toEqual(instance.onEditMedicine);
         expect(element.at(0).prop('deleteMedicine')).toEqual(defaultProps.deleteMedicine);
     });
 
