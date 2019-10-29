@@ -161,7 +161,6 @@ describe('components => add-medicines', () => {
     it.each`
         step        | expected
         ${STEP.one} | ${'Add/Edit medicine 1/2'}
-        ${STEP.two} | ${'Add/Edit medicine 2/2'}
     `('Should render ModalBase', ({ step, expected }) => {
         //Given
         const wrapper = mount<AddMedicine>(<AddMedicine {...defaultProps} />);
@@ -237,20 +236,20 @@ describe('components => add-medicines', () => {
         expect(element.prop('onNext')).toEqual(instance.openStepTwo);
     });
 
-    it('Should render StepTwoFirmik', () => {
-        //Given
-        const wrapper = mount<AddMedicine>(<AddMedicine {...defaultProps} />);
-        const instance = wrapper.instance();
-
-        instance.setState({ step: STEP.two });
-
-        wrapper.update();
-
-        //When
-        const element = wrapper.find('.step-two-firmik');
-
-        //Then
-        expect(element.prop('onCancel')).toEqual(defaultProps.onClose);
-        expect(element.prop('onPrev')).toEqual(instance.openStepOne);
-    });
+    // it('Should render StepTwoFirmik', () => {
+    //     //Given
+    //     const wrapper = mount<AddMedicine>(<AddMedicine {...defaultProps} />);
+    //     const instance = wrapper.instance();
+    //
+    //     instance.setState({ step: STEP.two });
+    //
+    //     wrapper.update();
+    //
+    //     //When
+    //     const element = wrapper.find('.step-two-firmik');
+    //
+    //     //Then
+    //     expect(element.prop('onCancel')).toEqual(defaultProps.onClose);
+    //     expect(element.prop('onPrev')).toEqual(instance.openStepOne);
+    // });
 });

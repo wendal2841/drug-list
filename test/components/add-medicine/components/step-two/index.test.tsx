@@ -12,6 +12,9 @@ jest.mock(
             TextArea: (props: object): JSX.Element => (<div className="text-area" {...props} />),
         }),
         Button: (props: object): JSX.Element => (<div {...props} />),
+        message: ({
+            error: sinon.spy(),
+        })
     }),
 );
 
@@ -33,10 +36,11 @@ describe('components => add-medicine => components => step-two', () => {
     it('onSave test', () => {
         //Given
         const handleSubmitSpy = sinon.spy();
+        const errors = { code: 'code' };
         const wrapper = mount<StepTwo>(
             <StepTwo
                 {...defaultProps}
-                formik={{ ...defaultProps.formik, handleSubmit: handleSubmitSpy }}
+                formik={{ ...defaultProps.formik, handleSubmit: handleSubmitSpy, errors }}
             />
         );
         const instance = wrapper.instance();
