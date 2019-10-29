@@ -37,13 +37,12 @@ describe('components -> modal-overlay', () => {
     it('should pass callback', () => {
         //Given
         const wrapper = mount(<ModalOverlay {...props} />);
-        const { onClose } = wrapper.instance() as ModalOverlay;
 
         //When
-        const overlay = wrapper.find('.modal-overlay').get(0);
+        const element = wrapper.find('.modal-overlay');
 
         //Then
-        expect(overlay.props.onClick).toEqual(onClose);
+        expect(element).toHaveLength(1);
     });
 
     it('onKeyDown escape test', () => {
