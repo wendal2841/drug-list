@@ -14,9 +14,9 @@ export const MedicineRow = React.memo(({
     return (
         <div className="medicine-row" onDoubleClick={onEdit} >
             <div className="medicine-row__content" >
-                <span className="medicine-row__code" >Code: { code }</span>
-                <span className="medicine-row__name" >Name: { name }</span>
-                <span className="medicine-row__price" >Price: { price }</span>
+                <div className="medicine-row__code" >Code: { code }</div>
+                <div className="medicine-row__name" >Name: { name }</div>
+                <div className="medicine-row__price" >Price: { price }</div>
             </div>
             <div className="medicine-row__buttons">
                 <Button

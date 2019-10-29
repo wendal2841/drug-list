@@ -10,6 +10,7 @@
     }
 
     &__content {
+        display: flex;
         margin-left: 10px;
     }
 
@@ -23,6 +24,12 @@
 
     &__name, &__price {
         padding-left: 25px;
+    }
+
+    &__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__delete {
@@ -48,8 +55,36 @@
             padding-left: 0;
         }
 
+        &__name {
+            max-width: 300px;
+        }
+
         &__delete {
             margin-top: 5px;
+        }
+    }
+}
+
+@media (min-width: 580px) and (max-width: 767px) {
+    .medicine-row {
+        &__name {
+            max-width: 150px;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1050px) {
+    .medicine-row {
+        &__name {
+            max-width: 350px;
+        }
+    }
+}
+
+@media (min-width: 1050px) and (max-width: 1240px) {
+    .medicine-row {
+        &__name {
+            max-width: 600px;
         }
     }
 }
