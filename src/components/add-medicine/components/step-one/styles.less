@@ -1,5 +1,17 @@
 .step-one {
-    &__buttonsv {
+    &__code, &__name, &__price, &__shelf-life {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        .ant-input-number, .ant-input {
+            min-width: 55%;
+            width: 55%;
+        }
+    }
+
+    &__buttons {
         display: flex;
         justify-content: space-around;
     }

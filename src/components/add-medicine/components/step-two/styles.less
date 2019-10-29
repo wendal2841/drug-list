@@ -1,5 +1,18 @@
 .step-two {
-    &__buttonsv {
+    &__indication,
+    &__contraindications,
+    &__composition_and_form_of_release {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        .ant-input {
+            min-width: 55%;
+            width: 55%;
+        }
+    }
+
+    &__buttons {
         display: flex;
         justify-content: space-around;
     }
