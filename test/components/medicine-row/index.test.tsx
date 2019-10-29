@@ -45,16 +45,12 @@ describe('components => medicines-row', () => {
         const editMedicineSpy = sinon.spy();
         const wrapper = mount(<MedicineRow {...defaultProps} editMedicine={editMedicineSpy}  />);
         const element = wrapper.find('.medicine-row');
-        const expected = {
-            ...defaultProps.medicine,
-            price: 200,
-        };
 
         //When
         element.prop<() => void>('onDoubleClick')();
 
         //Then
-        expect(editMedicineSpy.calledOnceWithExactly(expected)).toBeTruthy();
+        expect(editMedicineSpy.calledOnceWithExactly(defaultProps.medicine)).toBeTruthy();
     });
 
     it('Should render medicines-row__code', () => {
@@ -95,10 +91,6 @@ describe('components => medicines-row', () => {
         const editMedicineSpy = sinon.spy();
         const wrapper = mount(<MedicineRow {...defaultProps} editMedicine={editMedicineSpy} />);
         const element = wrapper.find('.medicine-row__edit').at(0);
-        const expected = {
-            ...defaultProps.medicine,
-            price: 200,
-        };
 
         //When
         element.prop<() => void>('onClick')();
@@ -106,7 +98,7 @@ describe('components => medicines-row', () => {
         //Then
         expect(element.prop('type')).toEqual('primary');
         expect(element.text()).toEqual('Edit');
-        expect(editMedicineSpy.calledOnceWithExactly(expected)).toBeTruthy();
+        expect(editMedicineSpy.calledOnceWithExactly(defaultProps.medicine)).toBeTruthy();
     });
 
     it('Should render medicines-row__delete', () => {
