@@ -9,7 +9,7 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "allowJs": false,
     "checkJs": false,
     "moduleResolution": "node",
