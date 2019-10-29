@@ -6,6 +6,7 @@ import { StepTwoFirmik } from './components/step-two';
 import { Formik } from 'formik';
 import { INITIAL_VALUES } from './constants';
 import { IMedicine } from 'entities/medicines/types';
+import { validate } from './validate';
 
 const initialState: IStateAddMedicine = { step: STEP.one };
 
@@ -47,6 +48,7 @@ export class AddMedicine extends React.PureComponent<IPropsAddMedicine, IStateAd
                 <Formik
                     initialValues={medicine || INITIAL_VALUES}
                     onSubmit={this.onSubmit}
+                    validate={validate}
                 >
                     {
                         step === STEP.one ? (
